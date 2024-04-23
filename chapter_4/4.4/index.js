@@ -98,4 +98,42 @@ function makeUser() {
       },
     };
     ladder.up().up().down().showStep().down().showStep(); // показывает 1 затем 0
-  
+
+
+    //Создайте глобальную функцию printThis, которая выводит this. Затем вызовите эту функцию в глобальной области и внутри объекта:
+
+    function printThis() {
+      console.log(this); // this = window
+    }
+    
+    printThis(); // Выведет window в браузере
+    
+    let obj = {
+      print: printThis
+    };
+    
+    obj.print(); // Выведет объект obj
+
+    // Написать 2 примера: 1 - с потерей контекста, другой с привязкой без потери
+
+    const printer = {
+      model: "Zebra",
+      logTitle: function () {
+        setTimeout(() => {
+          console.log(`Product: ${this.model}`); // Zebra
+        }); 
+      },
+    };
+    
+    printer.logTitle();
+    
+    
+    const printer = {
+      model: "Urovo",
+      logTitle: function () {
+        setTimeout((function () {
+          console.log(`Product: ${this.model}`); //Urovo, если убрать bind - undefined
+        }).bind(this));
+      },
+    };
+    printer.logTitle();
